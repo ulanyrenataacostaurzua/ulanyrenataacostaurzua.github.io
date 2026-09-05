@@ -470,6 +470,11 @@
 
     /* Itinerario detallado (línea de tiempo) */
     .timeline-wrap { width: 100%; max-width: 540px; margin: 3rem auto 0; }
+    .itinerario-subtitulo {
+      font-family: var(--serif); font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 400; letter-spacing: 0.08em; color: var(--verde-principal);
+      text-align: center; margin: 0 auto 1.2rem;
+    }
     .timeline { display: flex; flex-direction: column; }
     .timeline-item {
       display: grid; grid-template-columns: 100px 1fr; gap: 1rem;
@@ -746,6 +751,69 @@
     .btn-rsvp:active { transform: translateY(0); }
     .btn-rsvp svg { width: 24px; height: 24px; flex-shrink: 0; }
 
+    /* --- RSVP dinámico (Google Sheets) --- */
+    .rsvp-oculto { display: none !important; }
+    .rsvp-saludo {
+      font-family: var(--serif); font-weight: 500; line-height: 1.1;
+      font-size: clamp(1.7rem, 4vw, 2.3rem); color: var(--verde-principal);
+    }
+    .rsvp-reserva {
+      font-family: var(--sans); font-size: clamp(0.92rem, 2vw, 1.05rem);
+      color: var(--verde-principal); opacity: 0.85; line-height: 1.7;
+    }
+    .rsvp-pregunta {
+      font-family: var(--sans); font-size: 0.68rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--verde-principal); opacity: 0.7;
+    }
+    .rsvp-opciones { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+    .rsvp-opt {
+      min-width: 52px; padding: 0.7rem 1rem; cursor: pointer;
+      font-family: var(--sans); font-size: 0.82rem; letter-spacing: 0.06em;
+      border: 1px solid rgba(11,49,38,0.32); border-radius: 50px;
+      background: transparent; color: var(--verde-principal);
+      transition: background 0.25s, color 0.25s, border-color 0.25s;
+    }
+    .rsvp-opt.cero { min-width: auto; }
+    .rsvp-opt:hover { border-color: var(--verde-principal); }
+    .rsvp-opt.activo { background: var(--verde-principal); color: var(--marfil); border-color: var(--verde-principal); }
+
+    .btn-confirmar {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 1.05rem 2.6rem; border-radius: 50px; cursor: pointer;
+      font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      background: var(--verde-principal); color: var(--marfil); border: none;
+      box-shadow: 0 6px 22px rgba(11,49,38,0.28);
+      transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
+    }
+    .btn-confirmar:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(11,49,38,0.34); }
+    .btn-confirmar:disabled { opacity: 0.5; cursor: default; box-shadow: none; }
+
+    .rsvp-estado {
+      font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.03em;
+      min-height: 1.1em; line-height: 1.6;
+    }
+    .rsvp-estado.cargando, .rsvp-estado.enviando { color: var(--verde-salvia); }
+    .rsvp-estado.ok    { color: #2e7d4f; }
+    .rsvp-estado.error { color: #b23b3b; }
+
+    .rsvp-ok-panel {
+      border: 1px solid rgba(200,183,138,0.6); background: rgba(11,49,38,0.04);
+      padding: 1.6rem 1.4rem; width: 100%;
+      display: flex; flex-direction: column; gap: 0.5rem; align-items: center;
+    }
+    .rsvp-ok-titulo { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 3vw, 1.7rem); color: var(--verde-principal); }
+    .rsvp-ok-detalle { font-family: var(--sans); font-size: 0.88rem; color: var(--verde-principal); opacity: 0.85; line-height: 1.8; white-space: pre-line; }
+    .rsvp-link-mod {
+      font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--verde-principal); opacity: 0.7; cursor: pointer;
+      background: none; border: none; text-decoration: underline; padding: 0.3rem;
+    }
+    .rsvp-alt-nota {
+      font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--verde-principal); opacity: 0.5;
+    }
+
     /* ============================================================
        FOOTER
     ============================================================ */
@@ -878,8 +946,7 @@
     </p>
 
     <p class="pres-cita reveal">
-      "Hoy comienza un nuevo capítulo de mi historia, escrito con fe y sueños,
-      rodeada del amor de mi familia y de quienes hacen especial mi vida."
+      "Una noche especial merece estar acompañada de personas especiales"
       <br><small style="font-size:0.7em; opacity:0.75; font-style:normal; letter-spacing:0.15em;">— Den gracias al Señor, porque él es bueno · Salmo 118:1</small>
     </p>
 
@@ -958,8 +1025,7 @@
   <section id="itinerario" class="section">
     <div class="section-title serif reveal">El gran día</div>
     <p class="itinerario-cita reveal">
-      Hay momentos que se guardan para siempre en el corazón.<br>
-      Gracias por acompañarme a vivir uno de ellos.
+      Los sueños se construyen con ilusión, esfuerzo y mucho corazón. Hoy quiero celebrar que uno de los míos se hace realidad
     </p>
 
     <div class="itinerario-grid">
@@ -994,8 +1060,9 @@
 
     <!-- Itinerario detallado (se genera desde el arreglo ITINERARIO en JS) -->
     <div class="timeline-wrap reveal reveal-delay-1">
+      <h3 class="itinerario-subtitulo serif">Itinerario</h3>
       <div class="timeline" id="timeline"></div>
-      <p class="timeline-nota">* Los momentos posteriores a la recepción son una guía y podrían ajustarse.</p>
+      <p class="timeline-nota">Quince años han pasado llenos de momentos, aprendizajes, sonrisas y mucho amor. Quiero dar gracias por cada uno de ellos y comienzo una nueva etapa, confiando en que Dios seguirá guiando cada paso de mi camino.</p>
     </div>
   </section>
 
@@ -1037,9 +1104,11 @@
 
         <!-- ── LIVERPOOL ───────────────────────── -->
         <div class="obsequio-col">
-          <div class="obsequio-marca">Liverpool</div>
+          <div class="obsequio-marca">
+           <img src="fotos/logo-liverpool.png" alt="Liverpool">
+          </div>
           <!-- ✅ REEMPLAZAR: número de evento real -->
-          <div class="obsequio-detalle">Evento: POR DEFINIR</div>
+          <div class="obsequio-detalle">Evento: 60036063</div>
           <!-- ✅ REEMPLAZAR: enlace real de la mesa de regalos -->
           <a class="btn-obsequio" href="AQUI_URL_LIVERPOOL" target="_blank" rel="noopener">Visitar</a>
         </div>
@@ -1048,21 +1117,25 @@
 
         <!-- ── AMAZON ──────────────────────────── -->
         <div class="obsequio-col">
-          <div class="obsequio-marca">Amazon</div>
+          <div class="obsequio-marca">
+          <img src="fotos/logo-amazon.png" alt="Amazon">
+          </div>
           <div class="obsequio-detalle">Lista de regalos</div>
           <!-- ✅ REEMPLAZAR: enlace real de la lista de Amazon -->
-          <a class="btn-obsequio" href="AQUI_URL_AMAZON" target="_blank" rel="noopener">Visitar</a>
+          <a class="btn-obsequio" href="https://www.amazon.com.mx/registries/gl/guest-view/1IU1CF60HJNN7?ref_=cm_sw_r_apann_ggr-subnav-share_R539WDFTA7NN5B990NJP&language=en-US" target="_blank" rel="noopener">Visitar</a>
         </div>
 
         <div class="obsequios-sep"></div>
 
         <!-- ── TRANSFERENCIA ───────────────────── -->
         <div class="obsequio-col">
-          <div class="obsequio-marca">Transferencia</div>
+          <div class="obsequio-marca">
+          <img src="fotos/logo-bbva.png" alt="BBVA">
+         </div>
           <!-- ✅ REEMPLAZAR: titular y CLABE reales -->
           <div class="obsequio-detalle">
-            Titular: POR DEFINIR<br>
-            CLABE: POR DEFINIR
+            Titular: Edgar Aaron Acosta Ornelas <br>
+            CLABE: 4152314202543875
           </div>
         </div>
 
@@ -1127,12 +1200,41 @@
     <div class="divider reveal"></div>
 
     <div class="rsvp-box">
-      <p class="rsvp-desc reveal">
-        Será un honor contar contigo en este día tan especial.
-        <br>Por favor confirma tu asistencia.
-      </p>
+
+      <!-- ===== Vista personalizada (enlace con ?c= o ?n=&p=) ===== -->
+      <div id="rsvpPersonal" class="rsvp-oculto" style="display:flex; flex-direction:column; gap:1.2rem; align-items:center; width:100%;">
+        <h3 class="rsvp-saludo reveal" id="rsvpSaludo">Hola</h3>
+        <p class="rsvp-reserva reveal" id="rsvpReserva"></p>
+
+        <!-- Selector de asistencia -->
+        <div id="rsvpFormulario" style="display:flex; flex-direction:column; gap:1rem; align-items:center; width:100%;">
+          <p class="rsvp-pregunta">¿Cuántas personas asistirán?</p>
+          <div class="rsvp-opciones" id="rsvpOpciones"></div>
+          <button class="btn-confirmar" id="rsvpConfirmar" type="button" disabled>Confirmar asistencia</button>
+        </div>
+
+        <!-- Panel de confirmación ya registrada / éxito -->
+        <div id="rsvpYaPanel" class="rsvp-ok-panel rsvp-oculto">
+          <span class="rsvp-ok-titulo" id="rsvpOkTitulo">Ya registramos tu confirmación</span>
+          <span class="rsvp-ok-detalle" id="rsvpOkDetalle"></span>
+          <button class="rsvp-link-mod" id="rsvpModificar" type="button">Modificar mi respuesta</button>
+        </div>
+
+        <p class="rsvp-estado" id="rsvpEstado" aria-live="polite"></p>
+      </div>
+
+      <!-- ===== Vista genérica (sin datos en la URL) ===== -->
+      <div id="rsvpGenerico">
+        <p class="rsvp-desc reveal">
+          Será un honor contar contigo en este día tan especial.
+          <br>Por favor confirma tu asistencia.
+        </p>
+      </div>
+
       <p class="rsvp-limit reveal reveal-delay-1" id="rsvpLimite">Fecha límite: POR DEFINIR</p>
 
+      <!-- WhatsApp como alternativa (se conserva) -->
+      <p class="rsvp-alt-nota rsvp-oculto reveal" id="rsvpAltNota">¿Prefieres escribirnos?</p>
       <a class="btn-rsvp reveal" id="btnRsvp" href="#" target="_blank" rel="noopener">
         <!-- Logo oficial de WhatsApp (SVG) -->
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1184,17 +1286,29 @@
     // ✅ FECHA LÍMITE PARA CONFIRMAR (configurable)
     const FECHA_LIMITE_RSVP = "POR DEFINIR"; // ej. "15 de septiembre de 2026"
 
+    // ✅ CONFIGURACIÓN RSVP → Google Sheets (Google Apps Script)
+    //    API_URL  → URL del Web App de Apps Script (termina en /exec).
+    //               Si la dejas como "URL_DEL_APPS_SCRIPT", el RSVP en línea se desactiva
+    //               y solo funciona el botón de WhatsApp (nada se rompe).
+    //    BASE_URL → dominio donde publicarás la invitación (se usa para generar enlaces).
+    const CONFIG = {
+      API_URL:  "https://script.google.com/macros/s/AKfycbxt33YiQk2Z2VM7wRYR88NcT44YIYYUmvdzOCrn-54h2X-uIc2i6KnBjeA0mNLhtXE80g/exec",
+      BASE_URL: "https://ulanyrenataacostaurzua.github.io/"
+    };
+
     // ✅ ITINERARIO DETALLADO
-    //    confirmado: true  → dato real
-    //    confirmado: false → propuesta de diseño (se marca con *). Edítalo libremente.
+    //    confirmado: true  → hora confirmada
+    //    confirmado: false → hora tentativa (se marca con *). Edítalo libremente.
     const ITINERARIO = [
-      { hora: "03:00 PM", titulo: "Misa de Acción de Gracias", confirmado: true  },
-      { hora: "06:00 PM", titulo: "Recepción",                 confirmado: true  },
-      { hora: "07:00 PM", titulo: "Presentación",              confirmado: false },
-      { hora: "07:30 PM", titulo: "Vals",                      confirmado: false },
-      { hora: "08:00 PM", titulo: "Cena",                      confirmado: false },
-      { hora: "09:00 PM", titulo: "Baile y celebración",       confirmado: false }
+      { hora: "03:00 PM", titulo: "⛪ Ceremonia Religiosa", confirmado: true },
+      { hora: "06:00 PM", titulo: "🥂 Recepción",            confirmado: true },
+      { hora: "07:00 PM", titulo: "💃 Vals",                 confirmado: true },
+      { hora: "08:00 PM", titulo: "🍽️ Cena",                confirmado: true },
+      { hora: "09:00 PM", titulo: "✨ Baile Sorpresa",       confirmado: true },
+      { hora: "09:30 PM", titulo: "🎉 Fiesta",               confirmado: true },
+      { hora: "12:00 AM", titulo: "🎺 Banda",                confirmado: true }
     ];
+
 
     // ==========================================
     // PANTALLA DE BIENVENIDA (SOBRE + MÚSICA)
@@ -1282,22 +1396,252 @@
     })();
 
     // ==========================================
-    // RSVP (WhatsApp + fecha límite, configurables)
+    // RSVP — Google Sheets (Apps Script) + WhatsApp (alternativa)
     // ==========================================
-    (function initRsvp() {
-      const link = document.getElementById('btnRsvp');
-      const limite = document.getElementById('rsvpLimite');
-      if (link) {
-        const mensaje =
-          "Hola Ulany \u2728\n" +
-          "Con gusto confirmo la asistencia de: [Escribir nombre(s) completo(s)]\n" +
-          "para acompañarte en tus XV Años el 17 de octubre de 2026.\n" +
-          "¡Muchas gracias!";
-        link.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(mensaje);
+    (function initRSVP() {
+      const $ = function (id) { return document.getElementById(id); };
+
+      // Fecha límite (se conserva)
+      const limiteEl = $('rsvpLimite');
+      if (limiteEl) limiteEl.textContent = "Fecha límite: " + FECHA_LIMITE_RSVP;
+
+      // Elementos
+      const personalEl  = $('rsvpPersonal');
+      const genericoEl   = $('rsvpGenerico');
+      const saludoEl     = $('rsvpSaludo');
+      const reservaEl    = $('rsvpReserva');
+      const formEl       = $('rsvpFormulario');
+      const opcionesEl   = $('rsvpOpciones');
+      const confirmarEl  = $('rsvpConfirmar');
+      const estadoEl     = $('rsvpEstado');
+      const yaPanel      = $('rsvpYaPanel');
+      const okTitulo     = $('rsvpOkTitulo');
+      const okDetalle    = $('rsvpOkDetalle');
+      const modificarEl  = $('rsvpModificar');
+      const altNota      = $('rsvpAltNota');
+      const waLink       = $('btnRsvp');
+
+      // Parámetros de la URL
+      const params = new URLSearchParams(window.location.search);
+      const code   = (params.get('c') || '').trim();
+      const nParam = (params.get('n') || '').trim();
+      const pParam = parseInt(params.get('p'), 10);
+      const apiOk  = !!(CONFIG && CONFIG.API_URL && CONFIG.API_URL.indexOf('http') === 0);
+
+      let invitado  = null;   // { codigo, nombre, pases }
+      let seleccion = null;   // número elegido
+      let enviando  = false;  // evita doble envío
+
+      // ---- Utilidades ----
+      function lugares(n)  { return n === 1 ? '1 lugar'   : n + ' lugares'; }
+      function personas(n) { return n === 1 ? '1 persona' : n + ' personas'; }
+      function setEstado(msg, tipo) {
+        if (!estadoEl) return;
+        estadoEl.textContent = msg || '';
+        estadoEl.className = 'rsvp-estado' + (tipo ? ' ' + tipo : '');
       }
-      if (limite) {
-        limite.textContent = "Fecha límite: " + FECHA_LIMITE_RSVP;
+      function slug(s) {
+        return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
       }
+      function revelar(el) {
+        if (!el) return;
+        el.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('visible'); });
+      }
+      function toQuery(obj) {
+        return Object.keys(obj).map(function (k) {
+          return encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]);
+        }).join('&');
+      }
+
+      // ---- JSONP (compatible con Safari/iPhone, sin problemas de CORS) ----
+      function jsonp(obj) {
+        return new Promise(function (resolve, reject) {
+          const cb = 'rsvp_cb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+          const s = document.createElement('script');
+          let done = false;
+          const t = setTimeout(function () { if (!done) { limpiar(); reject(new Error('timeout')); } }, 15000);
+          function limpiar() {
+            done = true; clearTimeout(t);
+            try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+            if (s.parentNode) s.parentNode.removeChild(s);
+          }
+          window[cb] = function (data) { limpiar(); resolve(data); };
+          const url = CONFIG.API_URL + (CONFIG.API_URL.indexOf('?') >= 0 ? '&' : '?') +
+                      toQuery(Object.assign({}, obj, { callback: cb }));
+          s.src = url;
+          s.onerror = function () { if (!done) { limpiar(); reject(new Error('network')); } };
+          document.body.appendChild(s);
+        });
+      }
+
+      // ---- WhatsApp (alternativa) ----
+      function setWhatsapp() {
+        if (!waLink) return;
+        let msg;
+        if (invitado) {
+          msg = 'Hola Ulany \u2728\nConfirmo la asistencia de ' + invitado.nombre +
+                ' (' + lugares(invitado.pases) + ' reservados) a tus XV Años el 17 de octubre de 2026.\n¡Gracias!';
+        } else {
+          msg = 'Hola Ulany \u2728\nCon gusto confirmo la asistencia de: [Escribir nombre(s) completo(s)]' +
+                '\npara acompañarte en tus XV Años el 17 de octubre de 2026.\n¡Muchas gracias!';
+        }
+        waLink.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+      }
+
+      // ---- Render de la vista personalizada ----
+      function mostrarPersonal() {
+        if (genericoEl) genericoEl.classList.add('rsvp-oculto');
+        personalEl.classList.remove('rsvp-oculto');
+        if (altNota) altNota.classList.remove('rsvp-oculto');
+        saludoEl.textContent  = '¡Hola, ' + invitado.nombre + '!';
+        reservaEl.textContent = 'Hemos reservado ' + lugares(invitado.pases) + ' para ' + invitado.nombre + '.';
+        setWhatsapp();
+        revelar(personalEl);
+      }
+
+      function construirOpciones(pases, preseleccion) {
+        opcionesEl.innerHTML = '';
+        for (let i = 0; i <= pases; i++) {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'rsvp-opt' + (i === 0 ? ' cero' : '');
+          b.textContent = (i === 0) ? 'No podremos asistir' : String(i);
+          b.setAttribute('data-val', String(i));
+          b.addEventListener('click', function () {
+            seleccion = i;
+            Array.prototype.forEach.call(opcionesEl.children, function (c) { c.classList.remove('activo'); });
+            b.classList.add('activo');
+            confirmarEl.disabled = false;
+            setEstado('', '');
+          });
+          opcionesEl.appendChild(b);
+        }
+        confirmarEl.disabled = true;
+        if (typeof preseleccion === 'number' && preseleccion >= 0 && preseleccion <= pases) {
+          const target = opcionesEl.querySelector('[data-val="' + preseleccion + '"]');
+          if (target) target.click();
+        }
+      }
+
+      function mostrarFormulario(preseleccion) {
+        yaPanel.classList.add('rsvp-oculto');
+        formEl.classList.remove('rsvp-oculto');
+        construirOpciones(invitado.pases, preseleccion);
+      }
+
+      function mostrarYaConfirmado(pasesConf, asistencia) {
+        formEl.classList.add('rsvp-oculto');
+        yaPanel.classList.remove('rsvp-oculto');
+        okTitulo.textContent = 'Ya registramos tu confirmación';
+        let det = invitado.nombre + '\n' + lugares(invitado.pases) + ' reservados\n';
+        if (asistencia === 'No' || pasesConf === 0) det += 'Nos avisaste que no podrán asistir.';
+        else det += personas(pasesConf) + ' confirmadas';
+        okDetalle.textContent = det;
+      }
+
+      function mostrarExito(conf) {
+        setEstado('', '');
+        formEl.classList.add('rsvp-oculto');
+        yaPanel.classList.remove('rsvp-oculto');
+        seleccion = conf;
+        if (conf === 0) {
+          okTitulo.textContent = 'Gracias por avisarnos';
+          okDetalle.textContent = invitado.nombre + '\nLamentamos que no puedan acompañarnos.';
+        } else {
+          okTitulo.textContent = '\u2713 ¡Gracias, ' + invitado.nombre + '!';
+          okDetalle.textContent = 'Hemos registrado la asistencia de ' + personas(conf) + '.';
+        }
+      }
+
+      // ---- Enviar confirmación ----
+      function confirmar() {
+        if (enviando) return;
+        if (seleccion === null) { setEstado('Selecciona una opción, por favor.', 'error'); return; }
+        if (seleccion < 0 || seleccion > invitado.pases) { setEstado('Cantidad no válida.', 'error'); return; }
+        if (!apiOk) {
+          setEstado('El registro en línea aún no está configurado. Puedes confirmar por WhatsApp.', 'error');
+          return;
+        }
+        enviando = true;
+        confirmarEl.disabled = true;
+        setEstado('Enviando...', 'enviando');
+        jsonp({
+          action: 'confirm',
+          code:   invitado.codigo,
+          nombre: invitado.nombre,
+          pases:  invitado.pases,
+          asisten: seleccion,
+          origen: window.location.href,
+          ua:     navigator.userAgent
+        }).then(function (res) {
+          enviando = false;
+          if (res && res.ok) {
+            const conf = (typeof res.pases_confirmados === 'number') ? res.pases_confirmados : seleccion;
+            mostrarExito(conf);
+          } else {
+            setEstado((res && res.error) ? res.error : 'No pudimos registrar tu respuesta. Intenta de nuevo.', 'error');
+            confirmarEl.disabled = false;
+          }
+        }).catch(function () {
+          enviando = false;
+          setEstado('Hubo un problema de conexión. Revisa tu internet e intenta otra vez.', 'error');
+          confirmarEl.disabled = false;
+        });
+      }
+
+      if (confirmarEl) confirmarEl.addEventListener('click', confirmar);
+      if (modificarEl) modificarEl.addEventListener('click', function () {
+        setEstado('', '');
+        mostrarFormulario(seleccion !== null ? seleccion : invitado.pases);
+      });
+
+      // ---- Arranque ----
+      setWhatsapp(); // deja WhatsApp listo aunque no haya datos
+
+      // Caso 1: código único ?c=AB12 → busca nombre/pases en la hoja
+      if (code && apiOk) {
+        setEstado('Cargando tu invitación...', 'cargando');
+        jsonp({ action: 'lookup', code: code }).then(function (res) {
+          setEstado('', '');
+          if (res && res.ok && res.nombre) {
+            invitado = { codigo: code, nombre: res.nombre, pases: parseInt(res.pases, 10) || 0 };
+            mostrarPersonal();
+            if (res.confirmado) {
+              seleccion = (typeof res.pases_confirmados === 'number') ? res.pases_confirmados : null;
+              mostrarYaConfirmado(res.pases_confirmados, res.asistencia);
+            } else {
+              mostrarFormulario(invitado.pases);
+            }
+          }
+          // Si el código no existe/está inactivo, se queda la vista genérica + WhatsApp.
+        }).catch(function () {
+          setEstado('No pudimos cargar tu invitación. Puedes confirmar por WhatsApp.', 'error');
+        });
+        return;
+      }
+
+      // Caso 2: ?n=Nombre&p=4 (modo simple, sin hoja maestra)
+      if (nParam && !isNaN(pParam) && pParam >= 0) {
+        invitado = { codigo: 'NP-' + slug(nParam), nombre: nParam, pases: pParam };
+        mostrarPersonal();
+        if (apiOk) {
+          jsonp({ action: 'lookup', code: invitado.codigo, nombre: invitado.nombre, pases: invitado.pases })
+            .then(function (res) {
+              if (res && res.ok && res.confirmado) {
+                seleccion = res.pases_confirmados;
+                mostrarYaConfirmado(res.pases_confirmados, res.asistencia);
+              } else {
+                mostrarFormulario(invitado.pases);
+              }
+            }).catch(function () { mostrarFormulario(invitado.pases); });
+        } else {
+          mostrarFormulario(invitado.pases);
+        }
+        return;
+      }
+
+      // Caso 3: sin parámetros → vista genérica + WhatsApp (comportamiento actual)
     })();
 
     // ==========================================
