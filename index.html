@@ -431,11 +431,11 @@
     }
     /* Foto de fondo — MISA */
     .itinerario-item:nth-child(1) {
-      background: url('fotos/fondo-ceremonia.jpg') center/cover no-repeat;
+      background: url('fotos/fondo-ceremonia.png') center/cover no-repeat;
     }
     /* Foto de fondo — RECEPCIÓN */
     .itinerario-item:nth-child(2) {
-      background: url('fotos/fondo-recepcion.jpg') center/cover no-repeat;
+      background: url('fotos/fondo-recepcion.png') center/cover no-repeat;
     }
     .itinerario-item::after {
       content: ''; position: absolute; inset: 0;
@@ -815,6 +815,165 @@
     }
 
     /* ============================================================
+       SECCIÓN — CÓDIGO DE VESTIMENTA  (NUEVA)
+    ============================================================ */
+    #vestimenta { background: var(--marfil); color: var(--texto-oscuro); }
+    #vestimenta .section-title { color: var(--verde-principal); }
+    .vest-panel {
+      width: 100%; max-width: 500px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      text-align: center;
+      border: 1px solid rgba(185,164,106,0.5);
+      padding: clamp(2rem, 5vw, 2.8rem) clamp(1.5rem, 5vw, 2.6rem);
+    }
+    .vest-icono { color: var(--dorado-suave); opacity: 0.9; }
+    .vest-icono svg { width: 42px; height: 42px; display: block; }
+    .vest-eyebrow {
+      font-family: var(--sans); font-size: 0.62rem;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--verde-salvia);
+    }
+    .vest-principal {
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2.4rem, 8vw, 3.4rem); line-height: 1;
+      letter-spacing: 0.04em; color: var(--verde-principal);
+    }
+    .vest-linea { width: 54px; height: 1px; background: var(--dorado-suave); opacity: 0.6; }
+    .vest-nota {
+      display: flex; align-items: center; gap: 0.6rem; justify-content: center;
+      flex-wrap: wrap;
+      font-family: var(--sans); font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+      font-weight: 300; line-height: 1.7; color: var(--verde-principal);
+      max-width: 360px;
+    }
+    /* Muestra discreta del color reservado (dato, no adorno) */
+    .vest-swatch {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--verde-principal);
+      border: 1px solid rgba(24,33,29,0.25);
+      flex-shrink: 0;
+    }
+    .vest-nota strong { font-weight: 500; }
+
+    /* ============================================================
+       CAMPO — MENSAJE DE FELICITACIÓN EN EL RSVP  (NUEVO)
+    ============================================================ */
+    .rsvp-msg-wrap {
+      width: 100%; display: flex; flex-direction: column; gap: 0.4rem;
+      align-items: flex-start; text-align: left;
+    }
+    .rsvp-msg-label {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.02rem, 2.4vw, 1.2rem); color: var(--verde-principal);
+    }
+    .rsvp-msg-label span {
+      font-family: var(--sans); font-style: normal;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      opacity: 0.55; margin-left: 0.4rem;
+    }
+    .rsvp-msg {
+      width: 100%; min-height: 96px; resize: vertical;
+      font-family: var(--sans); font-size: 0.9rem; font-weight: 300;
+      line-height: 1.6; color: var(--texto-oscuro);
+      background: var(--blanco-puro);
+      border: 1px solid rgba(11,49,38,0.28); border-radius: 4px;
+      padding: 0.85rem 0.95rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .rsvp-msg::placeholder { color: rgba(24,33,29,0.4); font-style: italic; }
+    .rsvp-msg:focus {
+      outline: none; border-color: var(--dorado-suave);
+      box-shadow: 0 0 0 3px rgba(200,183,138,0.18);
+    }
+    .rsvp-msg-count {
+      align-self: flex-end;
+      font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.08em;
+      color: var(--verde-principal); opacity: 0.5;
+    }
+    .rsvp-msg-count.limite { color: #b23b3b; opacity: 0.9; }
+    /* Mensaje mostrado dentro del panel de éxito */
+    .rsvp-ok-mensaje {
+      margin-top: 0.4rem; width: 100%;
+      border-top: 1px solid rgba(200,183,138,0.5); padding-top: 0.9rem;
+      display: flex; flex-direction: column; gap: 0.3rem; align-items: center;
+    }
+    .rsvp-ok-mensaje .etq {
+      font-family: var(--sans); font-size: 0.58rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--verde-salvia);
+    }
+    .rsvp-ok-mensaje .txt {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1rem, 2.4vw, 1.2rem); line-height: 1.6;
+      color: var(--verde-principal);
+    }
+
+    /* ============================================================
+       SECCIÓN — COMPARTE TUS MOMENTOS (FOTOS)  (NUEVA)
+    ============================================================ */
+    #compartir { background: var(--marfil); color: var(--texto-oscuro); }
+    #compartir .section-title { color: var(--verde-principal); }
+    .cf-box {
+      width: 100%; max-width: 520px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center; gap: 1.4rem;
+      text-align: center;
+    }
+    .cf-desc {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1.15rem, 2.4vw, 1.45rem); line-height: 1.6;
+      color: var(--verde-principal); opacity: 0.85;
+    }
+    .cf-sub {
+      font-family: var(--sans); font-size: clamp(0.82rem, 1.7vw, 0.92rem);
+      font-weight: 300; line-height: 1.8; color: var(--verde-principal); opacity: 0.75;
+      max-width: 420px;
+    }
+    /* Campo de nombre (solo si no hay código en la URL) */
+    .cf-nombre-wrap { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 0.35rem; text-align: left; }
+    .cf-nombre-label { font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--verde-salvia); }
+    .cf-nombre {
+      width: 100%; font-family: var(--sans); font-size: 0.9rem; color: var(--texto-oscuro);
+      background: var(--blanco-puro); border: 1px solid rgba(11,49,38,0.28); border-radius: 4px;
+      padding: 0.7rem 0.9rem; transition: border-color 0.25s;
+    }
+    .cf-nombre:focus { outline: none; border-color: var(--dorado-suave); }
+    /* Botón principal (reutiliza estética de confirmar) */
+    .cf-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      padding: 1.05rem 2.4rem; border-radius: 50px; cursor: pointer;
+      font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      background: var(--verde-principal); color: var(--marfil); border: none;
+      box-shadow: 0 6px 22px rgba(11,49,38,0.28);
+      transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
+    }
+    .cf-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(11,49,38,0.34); }
+    .cf-btn:disabled { opacity: 0.5; cursor: default; box-shadow: none; }
+    .cf-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+    /* Vista previa */
+    .cf-preview {
+      width: 100%; max-width: 320px; border: 1px solid rgba(185,164,106,0.5);
+      padding: 0.5rem; background: var(--blanco-puro);
+    }
+    .cf-preview img { width: 100%; height: auto; display: block; }
+    /* Barra de progreso */
+    .cf-progreso { width: 100%; max-width: 320px; height: 3px; background: rgba(11,49,38,0.12); overflow: hidden; }
+    .cf-progreso-barra { height: 100%; width: 0%; background: var(--dorado-suave); transition: width 0.3s ease; }
+    /* Estado / mensajes */
+    .cf-estado {
+      font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.02em;
+      line-height: 1.6; min-height: 1.1em;
+    }
+    .cf-estado.subiendo { color: var(--verde-salvia); }
+    .cf-estado.ok       { color: #2e7d4f; }
+    .cf-estado.error    { color: #b23b3b; }
+    .cf-nota {
+      font-family: var(--sans); font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--verde-principal); opacity: 0.45;
+    }
+    .cf-oculto { display: none !important; }
+
+    /* ============================================================
        FOOTER
     ============================================================ */
     #footer {
@@ -1087,6 +1246,36 @@
 
 
   <!-- ============================================================
+       SECCIÓN — CÓDIGO DE VESTIMENTA
+  ============================================================ -->
+  <section id="vestimenta" class="section">
+    <div class="section-title serif reveal">Código de vestimenta</div>
+    <div class="divider reveal" style="background: var(--verde-principal); opacity:0.2;"></div>
+
+    <div class="vest-panel reveal reveal-delay-1">
+      <div class="vest-icono" aria-hidden="true">
+        <!-- Icono de línea: pajarita / etiqueta formal -->
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"
+             stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 8v9"/>
+          <path d="M14 17h20l-3 6 3 6H14l3-6-3-6z"/>
+          <circle cx="24" cy="23" r="2"/>
+          <path d="M18 8h12"/>
+          <path d="M24 35v5"/>
+        </svg>
+      </div>
+      <span class="vest-eyebrow">Te esperamos elegante</span>
+      <div class="vest-principal">Formal</div>
+      <div class="vest-linea"></div>
+      <p class="vest-nota">
+        <span class="vest-swatch" aria-hidden="true"></span>
+        <span>Con cariño te pedimos reservar el <strong>color verde</strong> exclusivamente para la quinceañera.</span>
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        SECCIÓN 7 — MESA DE REGALOS
   ============================================================ -->
   <section id="obsequios">
@@ -1110,7 +1299,7 @@
           <!-- ✅ REEMPLAZAR: número de evento real -->
           <div class="obsequio-detalle">Evento: 60036063</div>
           <!-- ✅ REEMPLAZAR: enlace real de la mesa de regalos -->
-          <a class="btn-obsequio" href="AQUI_URL_LIVERPOOL" target="_blank" rel="noopener">Visitar</a>
+          <a class="btn-obsequio" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/60036063" target="_blank" rel="noopener">Visitar</a>
         </div>
 
         <div class="obsequios-sep"></div>
@@ -1210,6 +1399,15 @@
         <div id="rsvpFormulario" style="display:flex; flex-direction:column; gap:1rem; align-items:center; width:100%;">
           <p class="rsvp-pregunta">¿Cuántas personas asistirán?</p>
           <div class="rsvp-opciones" id="rsvpOpciones"></div>
+
+          <!-- Mensaje de felicitación (opcional) -->
+          <div class="rsvp-msg-wrap">
+            <label class="rsvp-msg-label" for="rsvpMensaje">Déjale un mensaje a Ulany <span>opcional</span></label>
+            <textarea id="rsvpMensaje" class="rsvp-msg" maxlength="300"
+                      placeholder="Escribe aquí un mensaje de felicitación para Ulany…"></textarea>
+            <span class="rsvp-msg-count" id="rsvpMensajeCount">0 / 300</span>
+          </div>
+
           <button class="btn-confirmar" id="rsvpConfirmar" type="button" disabled>Confirmar asistencia</button>
         </div>
 
@@ -1217,6 +1415,10 @@
         <div id="rsvpYaPanel" class="rsvp-ok-panel rsvp-oculto">
           <span class="rsvp-ok-titulo" id="rsvpOkTitulo">Ya registramos tu confirmación</span>
           <span class="rsvp-ok-detalle" id="rsvpOkDetalle"></span>
+          <div class="rsvp-ok-mensaje rsvp-oculto" id="rsvpOkMensaje">
+            <span class="etq">Tu mensaje para Ulany</span>
+            <span class="txt" id="rsvpOkMensajeTxt"></span>
+          </div>
           <button class="rsvp-link-mod" id="rsvpModificar" type="button">Modificar mi respuesta</button>
         </div>
 
@@ -1243,6 +1445,52 @@
         </svg>
         Confirmar por WhatsApp
       </a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN — COMPARTE TUS MOMENTOS (FOTOS DE INVITADOS)
+  ============================================================ -->
+  <section id="compartir" class="section">
+    <div class="section-title serif reveal">Comparte tus momentos</div>
+    <div class="divider reveal" style="background: var(--verde-principal); opacity:0.2;"></div>
+
+    <div class="cf-box">
+      <p class="cf-desc reveal">¿Tienes una foto con Ulany?</p>
+      <p class="cf-sub reveal reveal-delay-1">
+        Comparte tus recuerdos de esta noche y ayúdanos a guardar cada momento especial.
+      </p>
+
+      <!-- Nombre (aparece solo si no hay código en la URL) -->
+      <div class="cf-nombre-wrap cf-oculto reveal" id="cfNombreWrap">
+        <label class="cf-nombre-label" for="cfNombre">¿Cómo te llamas?</label>
+        <input type="text" id="cfNombre" class="cf-nombre" maxlength="80" placeholder="Tu nombre">
+      </div>
+
+      <!-- Input de archivo oculto -->
+      <input type="file" id="cfInput" accept="image/jpeg,image/png,image/webp" class="cf-oculto">
+
+      <!-- Vista previa -->
+      <div class="cf-preview cf-oculto reveal" id="cfPreview"><img id="cfPreviewImg" alt="Vista previa de tu fotografía"></div>
+
+      <!-- Botón para elegir/enviar -->
+      <button class="cf-btn reveal reveal-delay-1" id="cfBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+        Compartir una fotografía
+      </button>
+
+      <!-- Barra de progreso -->
+      <div class="cf-progreso cf-oculto" id="cfProgreso"><div class="cf-progreso-barra" id="cfProgresoBarra"></div></div>
+
+      <!-- Estado -->
+      <p class="cf-estado" id="cfEstado" aria-live="polite"></p>
+
+      <p class="cf-nota reveal">JPG, PNG o WEBP · máx. 10 MB</p>
     </div>
   </section>
 
@@ -1294,6 +1542,19 @@
     const CONFIG = {
       API_URL:  "https://script.google.com/macros/s/AKfycbxt33YiQk2Z2VM7wRYR88NcT44YIYYUmvdzOCrn-54h2X-uIc2i6KnBjeA0mNLhtXE80g/exec",
       BASE_URL: "https://ulanyrenataacostaurzua.github.io/"
+    };
+
+    // ✅ MENSAJE DE FELICITACIÓN (RSVP)
+    const MENSAJE_MAX = 300; // máximo de caracteres del mensaje
+
+    // ✅ COMPARTIR FOTOGRAFÍAS → Google Apps Script + Google Drive
+    //    Usa el MISMO CONFIG.API_URL. Las validaciones y el almacenamiento
+    //    en Drive se realizan en el Apps Script (Código.gs).
+    const FOTOS = {
+      MAX_MB: 10,                                           // tamaño máx. del archivo original
+      TIPOS:  ['image/jpeg', 'image/png', 'image/webp'],   // tipos permitidos
+      MAX_LADO: 1920,                                       // px máx. del lado mayor (redimensión)
+      CALIDAD:  0.85                                        // calidad JPEG al comprimir (0–1)
     };
 
     // ✅ ITINERARIO DETALLADO
@@ -1420,6 +1681,10 @@
       const modificarEl  = $('rsvpModificar');
       const altNota      = $('rsvpAltNota');
       const waLink       = $('btnRsvp');
+      const mensajeEl    = $('rsvpMensaje');
+      const mensajeCount = $('rsvpMensajeCount');
+      const okMensaje    = $('rsvpOkMensaje');
+      const okMensajeTxt = $('rsvpOkMensajeTxt');
 
       // Parámetros de la URL
       const params = new URLSearchParams(window.location.search);
@@ -1452,6 +1717,28 @@
         return Object.keys(obj).map(function (k) {
           return encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]);
         }).join('&');
+      }
+
+      // ---- Mensaje de felicitación ----
+      // Sanitiza en cliente: colapsa espacios, recorta y limita longitud.
+      // (El Apps Script vuelve a sanitizar; nunca se confía solo en el cliente.)
+      function limpiarMensaje(txt) {
+        return String(txt || '')
+          .replace(/[\u0000-\u001F\u007F]/g, ' ') // quita caracteres de control
+          .replace(/[ \t]{2,}/g, ' ')
+          .trim()
+          .slice(0, MENSAJE_MAX);
+      }
+      function actualizarContador() {
+        if (!mensajeEl || !mensajeCount) return;
+        var n = mensajeEl.value.length;
+        mensajeCount.textContent = n + ' / ' + MENSAJE_MAX;
+        mensajeCount.classList.toggle('limite', n >= MENSAJE_MAX);
+      }
+      if (mensajeEl) {
+        mensajeEl.setAttribute('maxlength', String(MENSAJE_MAX));
+        mensajeEl.addEventListener('input', actualizarContador);
+        actualizarContador();
       }
 
       // ---- JSONP (compatible con Safari/iPhone, sin problemas de CORS) ----
@@ -1527,7 +1814,25 @@
       function mostrarFormulario(preseleccion) {
         yaPanel.classList.add('rsvp-oculto');
         formEl.classList.remove('rsvp-oculto');
+        // Precarga el mensaje previo (si el invitado ya había dejado uno)
+        if (mensajeEl && invitado && typeof invitado.mensaje === 'string') {
+          mensajeEl.value = invitado.mensaje;
+          actualizarContador();
+        }
         construirOpciones(invitado.pases, preseleccion);
+      }
+
+      // Muestra u oculta el mensaje dentro del panel de éxito (seguro: textContent)
+      function pintarMensajeOk(txt) {
+        if (!okMensaje || !okMensajeTxt) return;
+        var limpio = (txt || '').trim();
+        if (limpio) {
+          okMensajeTxt.textContent = '\u201C' + limpio + '\u201D';
+          okMensaje.classList.remove('rsvp-oculto');
+        } else {
+          okMensajeTxt.textContent = '';
+          okMensaje.classList.add('rsvp-oculto');
+        }
       }
 
       function mostrarYaConfirmado(pasesConf, asistencia) {
@@ -1538,9 +1843,10 @@
         if (asistencia === 'No' || pasesConf === 0) det += 'Nos avisaste que no podrán asistir.';
         else det += personas(pasesConf) + ' confirmadas';
         okDetalle.textContent = det;
+        pintarMensajeOk(invitado ? invitado.mensaje : '');
       }
 
-      function mostrarExito(conf) {
+      function mostrarExito(conf, mensaje) {
         setEstado('', '');
         formEl.classList.add('rsvp-oculto');
         yaPanel.classList.remove('rsvp-oculto');
@@ -1550,8 +1856,10 @@
           okDetalle.textContent = invitado.nombre + '\nLamentamos que no puedan acompañarnos.';
         } else {
           okTitulo.textContent = '\u2713 ¡Gracias, ' + invitado.nombre + '!';
-          okDetalle.textContent = 'Hemos registrado la asistencia de ' + personas(conf) + '.';
+          okDetalle.textContent = 'Hemos registrado tu confirmación para acompañar a Ulany en sus XV años.\n' +
+                                  personas(conf) + ' confirmadas.';
         }
+        pintarMensajeOk(mensaje);
       }
 
       // ---- Enviar confirmación ----
@@ -1566,19 +1874,23 @@
         enviando = true;
         confirmarEl.disabled = true;
         setEstado('Enviando...', 'enviando');
+        var mensaje = mensajeEl ? limpiarMensaje(mensajeEl.value) : '';
         jsonp({
           action: 'confirm',
           code:   invitado.codigo,
           nombre: invitado.nombre,
           pases:  invitado.pases,
           asisten: seleccion,
+          mensaje: mensaje,
           origen: window.location.href,
           ua:     navigator.userAgent
         }).then(function (res) {
           enviando = false;
           if (res && res.ok) {
             const conf = (typeof res.pases_confirmados === 'number') ? res.pases_confirmados : seleccion;
-            mostrarExito(conf);
+            var msgGuardado = (res && typeof res.mensaje === 'string') ? res.mensaje : mensaje;
+            invitado.mensaje = msgGuardado; // recuerda el mensaje para "Modificar"
+            mostrarExito(conf, msgGuardado);
           } else {
             setEstado((res && res.error) ? res.error : 'No pudimos registrar tu respuesta. Intenta de nuevo.', 'error');
             confirmarEl.disabled = false;
@@ -1605,7 +1917,8 @@
         jsonp({ action: 'lookup', code: code }).then(function (res) {
           setEstado('', '');
           if (res && res.ok && res.nombre) {
-            invitado = { codigo: code, nombre: res.nombre, pases: parseInt(res.pases, 10) || 0 };
+            invitado = { codigo: code, nombre: res.nombre, pases: parseInt(res.pases, 10) || 0,
+                         mensaje: (typeof res.mensaje === 'string') ? res.mensaje : '' };
             mostrarPersonal();
             if (res.confirmado) {
               seleccion = (typeof res.pases_confirmados === 'number') ? res.pases_confirmados : null;
@@ -1623,13 +1936,14 @@
 
       // Caso 2: ?n=Nombre&p=4 (modo simple, sin hoja maestra)
       if (nParam && !isNaN(pParam) && pParam >= 0) {
-        invitado = { codigo: 'NP-' + slug(nParam), nombre: nParam, pases: pParam };
+        invitado = { codigo: 'NP-' + slug(nParam), nombre: nParam, pases: pParam, mensaje: '' };
         mostrarPersonal();
         if (apiOk) {
           jsonp({ action: 'lookup', code: invitado.codigo, nombre: invitado.nombre, pases: invitado.pases })
             .then(function (res) {
               if (res && res.ok && res.confirmado) {
                 seleccion = res.pases_confirmados;
+                invitado.mensaje = (typeof res.mensaje === 'string') ? res.mensaje : '';
                 mostrarYaConfirmado(res.pases_confirmados, res.asistencia);
               } else {
                 mostrarFormulario(invitado.pases);
@@ -1650,6 +1964,225 @@
     (function initHashtag() {
       const el = document.getElementById('footerHashtag');
       if (el) el.textContent = HASHTAG;
+    })();
+
+    // ==========================================
+    // COMPARTIR FOTOGRAFÍAS → Apps Script + Google Drive
+    // ==========================================
+    (function initCompartir() {
+      var $ = function (id) { return document.getElementById(id); };
+
+      var input      = $('cfInput');
+      var btn        = $('cfBtn');
+      var preview    = $('cfPreview');
+      var previewImg = $('cfPreviewImg');
+      var progreso   = $('cfProgreso');
+      var barra      = $('cfProgresoBarra');
+      var estado     = $('cfEstado');
+      var nombreWrap = $('cfNombreWrap');
+      var nombreInp  = $('cfNombre');
+
+      if (!input || !btn) return;
+
+      var apiOk = !!(CONFIG && CONFIG.API_URL && CONFIG.API_URL.indexOf('http') === 0);
+
+      // Datos del invitado desde la URL (reutiliza el esquema existente)
+      var params = new URLSearchParams(window.location.search);
+      var code   = (params.get('c') || '').trim();
+      var nParam = (params.get('n') || '').trim();
+
+      // Si hay ?n= en la URL, precargamos el nombre. Si no hay código ni nombre,
+      // pedimos el nombre para asociar la foto.
+      var tieneCodigo = !!code;
+      if (!tieneCodigo) {
+        if (nombreWrap) nombreWrap.classList.remove('cf-oculto');
+        if (nombreInp && nParam) nombreInp.value = nParam;
+      }
+
+      var archivo   = null;   // Blob listo para enviar
+      var nombreArch = '';    // nombre original (para extensión)
+      var subiendo  = false;  // evita doble envío
+
+      function setEstado(msg, tipo) {
+        if (!estado) return;
+        estado.textContent = msg || '';
+        estado.className = 'cf-estado' + (tipo ? ' ' + tipo : '');
+      }
+      function setProgreso(pct, visible) {
+        if (!progreso || !barra) return;
+        progreso.classList.toggle('cf-oculto', !visible);
+        barra.style.width = Math.max(0, Math.min(100, pct)) + '%';
+      }
+      function resetSeleccion() {
+        archivo = null; nombreArch = '';
+        if (input) input.value = '';
+        if (preview) preview.classList.add('cf-oculto');
+        if (previewImg) previewImg.removeAttribute('src');
+        btn.textContent = 'Compartir una fotografía';
+      }
+
+      function extDe(tipo, nombre) {
+        if (tipo === 'image/png') return 'png';
+        if (tipo === 'image/webp') return 'webp';
+        if (tipo === 'image/jpeg') return 'jpg';
+        var m = /\.([a-z0-9]+)$/i.exec(nombre || '');
+        return m ? m[1].toLowerCase() : 'jpg';
+      }
+
+      // Redimensiona/comprime en el navegador para reducir el tamaño de transferencia.
+      // Conserva el original si ya es pequeño y de dimensiones razonables.
+      function optimizar(file) {
+        return new Promise(function (resolve) {
+          var necesitaComprimir = file.size > 2 * 1024 * 1024; // > 2 MB
+          var url = URL.createObjectURL(file);
+          var img = new Image();
+          img.onload = function () {
+            var w = img.naturalWidth, h = img.naturalHeight;
+            var grande = Math.max(w, h) > FOTOS.MAX_LADO;
+            if (!necesitaComprimir && !grande) {
+              URL.revokeObjectURL(url);
+              resolve({ blob: file, mime: file.type, ext: extDe(file.type, file.name) });
+              return;
+            }
+            var escala = grande ? (FOTOS.MAX_LADO / Math.max(w, h)) : 1;
+            var cw = Math.round(w * escala), ch = Math.round(h * escala);
+            var canvas = document.createElement('canvas');
+            canvas.width = cw; canvas.height = ch;
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, cw, ch); // fondo (por si PNG/WEBP transparente)
+            ctx.drawImage(img, 0, 0, cw, ch);
+            URL.revokeObjectURL(url);
+            canvas.toBlob(function (blob) {
+              if (!blob) { resolve({ blob: file, mime: file.type, ext: extDe(file.type, file.name) }); return; }
+              resolve({ blob: blob, mime: 'image/jpeg', ext: 'jpg' });
+            }, 'image/jpeg', FOTOS.CALIDAD);
+          };
+          img.onerror = function () {
+            URL.revokeObjectURL(url);
+            resolve({ blob: file, mime: file.type, ext: extDe(file.type, file.name) });
+          };
+          img.src = url;
+        });
+      }
+
+      function blobABase64(blob) {
+        return new Promise(function (resolve, reject) {
+          var fr = new FileReader();
+          fr.onload = function () {
+            var s = String(fr.result || '');
+            var i = s.indexOf(',');
+            resolve(i >= 0 ? s.slice(i + 1) : s); // quita el prefijo data:...;base64,
+          };
+          fr.onerror = function () { reject(new Error('read')); };
+          fr.readAsDataURL(blob);
+        });
+      }
+
+      // Validación en cliente (el Apps Script vuelve a validar tipo y tamaño)
+      function validar(file) {
+        if (FOTOS.TIPOS.indexOf(file.type) < 0) {
+          setEstado('Formato no permitido. Usa JPG, PNG o WEBP.', 'error');
+          return false;
+        }
+        if (file.size > FOTOS.MAX_MB * 1024 * 1024) {
+          setEstado('La imagen supera el máximo de ' + FOTOS.MAX_MB + ' MB.', 'error');
+          return false;
+        }
+        return true;
+      }
+
+      // Selección de archivo
+      input.addEventListener('change', function () {
+        var file = input.files && input.files[0];
+        if (!file) return;
+        setEstado('', '');
+        setProgreso(0, false);
+        if (!validar(file)) { resetSeleccion(); return; }
+        archivo = file; nombreArch = file.name || 'foto';
+        // Vista previa
+        var url = URL.createObjectURL(file);
+        if (previewImg) { previewImg.src = url; }
+        if (preview) preview.classList.remove('cf-oculto');
+        btn.textContent = 'Enviar esta fotografía';
+      });
+
+      // Envío por XHR (permite mostrar progreso de carga). Usa POST con FormData:
+      // es una "petición simple" (sin preflight CORS) y compatible con iPhone/Safari.
+      function enviar() {
+        if (subiendo) return;
+        if (!apiOk) { setEstado('La carga aún no está configurada.', 'error'); return; }
+
+        var nombreInvitado = '';
+        if (tieneCodigo) {
+          nombreInvitado = nParam; // el servidor resolverá el nombre real por el código
+        } else {
+          nombreInvitado = nombreInp ? nombreInp.value.trim() : '';
+          if (!nombreInvitado) {
+            setEstado('Escribe tu nombre para asociar la fotografía.', 'error');
+            if (nombreInp) nombreInp.focus();
+            return;
+          }
+        }
+
+        subiendo = true;
+        btn.disabled = true;
+        setEstado('Preparando tu fotografía…', 'subiendo');
+        setProgreso(2, true);
+
+        optimizar(archivo).then(function (opt) {
+          return blobABase64(opt.blob).then(function (b64) {
+            var fd = new FormData();
+            fd.append('action', 'uploadphoto');
+            fd.append('code', code);
+            fd.append('nombre', nombreInvitado);
+            fd.append('filename', nombreArch);
+            fd.append('ext', opt.ext);
+            fd.append('mimeType', opt.mime);
+            fd.append('dataBase64', b64);
+            fd.append('origen', window.location.href);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', CONFIG.API_URL, true);
+            xhr.upload.onprogress = function (ev) {
+              if (ev.lengthComputable) {
+                var pct = 5 + Math.round((ev.loaded / ev.total) * 90);
+                setEstado('Subiendo tu fotografía…', 'subiendo');
+                setProgreso(pct, true);
+              }
+            };
+            xhr.onload = function () {
+              subiendo = false; btn.disabled = false;
+              var res = null;
+              try { res = JSON.parse(xhr.responseText); } catch (e) {}
+              if (xhr.status >= 200 && xhr.status < 300 && res && res.ok) {
+                setProgreso(100, true);
+                setEstado('¡Gracias! Tu fotografía se compartió correctamente.', 'ok');
+                setTimeout(function () { setProgreso(0, false); }, 1200);
+                resetSeleccion();
+                btn.textContent = 'Compartir otra fotografía';
+              } else {
+                setProgreso(0, false);
+                setEstado((res && res.error) ? res.error : 'No pudimos subir la fotografía. Intenta de nuevo.', 'error');
+              }
+            };
+            xhr.onerror = function () {
+              subiendo = false; btn.disabled = false; setProgreso(0, false);
+              setEstado('Hubo un problema de conexión. Revisa tu internet e intenta otra vez.', 'error');
+            };
+            xhr.send(fd);
+          });
+        }).catch(function () {
+          subiendo = false; btn.disabled = false; setProgreso(0, false);
+          setEstado('No pudimos procesar la imagen. Intenta con otra.', 'error');
+        });
+      }
+
+      // Un solo botón: si no hay archivo elegido, abre el selector; si ya hay, envía.
+      btn.addEventListener('click', function () {
+        if (subiendo) return;
+        if (!archivo) { input.click(); return; }
+        enviar();
+      });
     })();
 
     // ==========================================
